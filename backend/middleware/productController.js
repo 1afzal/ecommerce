@@ -71,5 +71,15 @@ async function updateProduct(req, res) {
     res.status(400).send(err.messsage);
   }
 }
+async function deleteProduct(){
+    idx = req.params.id;
+    const product = productModel.findByIdAndDelete(idx);
+    if(!product){
+        console.log("unable to find product");
+        return res.status(200).send("errror in fetchinf products for deleting")
+    }
+    const updated = productModel.save();
+    res.status(200).send(updated);
+}
 
-export { getProducts, getProductById, createProduct };
+export { getProducts, getProductById, createProduct, updateProduct,deleteProduct };
